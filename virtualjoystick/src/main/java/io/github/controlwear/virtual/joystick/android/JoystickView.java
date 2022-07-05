@@ -107,6 +107,11 @@ public class JoystickView extends View
      */
     private static final boolean DEFAULT_AUTO_RECENTER_BUTTON = true;
 
+    /**
+     * Default behavior to auto re-center button (automatically recenter the button)
+     */
+    private static final boolean DEFAULT_AUTO_RECENTER_BUTTONOnlyX = false;
+
 
     /**
      * Default behavior to button stickToBorder (button stay on the border)
@@ -156,6 +161,12 @@ public class JoystickView extends View
      * when released or not (false)
      */
     private boolean mAutoReCenterButton;
+
+    /**
+     * Used to adapt behavior whether the button is automatically re-centered only for X (true)
+     * when released or not (false)
+     */
+    private boolean mAutoReCenterButtonOnlyX;
 
 
     /**
@@ -274,6 +285,7 @@ public class JoystickView extends View
             borderWidth = styledAttributes.getDimensionPixelSize(R.styleable.JoystickView_JV_borderWidth, DEFAULT_WIDTH_BORDER);
             mFixedCenter = styledAttributes.getBoolean(R.styleable.JoystickView_JV_fixedCenter, DEFAULT_FIXED_CENTER);
             mAutoReCenterButton = styledAttributes.getBoolean(R.styleable.JoystickView_JV_autoReCenterButton, DEFAULT_AUTO_RECENTER_BUTTON);
+            mAutoReCenterButtonOnlyX = styledAttributes.getBoolean(R.styleable.JoystickView_JV_autoReCenterButton, DEFAULT_AUTO_RECENTER_BUTTONOnlyX);
             mButtonStickToBorder = styledAttributes.getBoolean(R.styleable.JoystickView_JV_buttonStickToBorder, DEFAULT_BUTTON_STICK_TO_BORDER);
             buttonDrawable = styledAttributes.getDrawable(R.styleable.JoystickView_JV_buttonImage);
             mEnabled = styledAttributes.getBoolean(R.styleable.JoystickView_JV_enabled, true);
@@ -450,6 +462,13 @@ public class JoystickView extends View
                 if (mCallback != null)
                     mCallback.onMove(getAngle(), getStrength());
             }
+            else if(mAutoReCenterButtonOnlyX){
+                resetButtonOnlyXPosition();
+
+                // update now the last strength and angle which should be zero after resetButton
+                if (mCallback != null)
+                    mCallback.onMove(getAngle(), getStrength());
+            }
 
             // if mAutoReCenterButton is false we will send the last strength and angle a bit
             // later only after processing new position X and Y otherwise it could be above the border limit
@@ -560,6 +579,13 @@ public class JoystickView extends View
         mPosY = mCenterY;
     }
 
+    /**
+     * Reset the button position to the center.
+     */
+    public void resetButtonOnlyXPosition() {
+        mPosX = mCenterX;
+    }
+
 
     /**
      * Return the current direction allowed for the button to move
@@ -643,6 +669,31 @@ public class JoystickView extends View
             return 50;
         }
         return Math.round((mPosY-mButtonRadius)*100.0f/(getHeight()-mButtonRadius*2));
+    }
+
+    /**
+     * Return the relative X coordinate of button center related
+     * to top-left virtual corner of the border
+     * @return coordinate of X (normalized between 0 and 100)
+     */
+    public int getNormalizedXTEST() {
+        if (getWidth() == 0) {
+            return 50;
+        }
+        return mPosX;
+    }
+
+
+    /**
+     * Return the relative Y coordinate of the button center related
+     * to top-left virtual corner of the border
+     * @return coordinate of Y (normalized between 0 and 100)
+     */
+    public int getNormalizedYTEST() {
+        if (getHeight() == 0) {
+            return 50;
+        }
+        return mPosY;
     }
 
 
@@ -822,6 +873,14 @@ public class JoystickView extends View
      */
     public void setAutoReCenterButton(boolean b) {
         mAutoReCenterButton = b;
+    }
+
+    /**
+     * Set the current behavior of the auto re-center button OnlyX
+     * @param b True if automatically re-centered or False if not
+     */
+    public void setAutoReCenterButtonOnlyX(boolean b) {
+        mAutoReCenterButtonOnlyX = b;
     }
 
 
