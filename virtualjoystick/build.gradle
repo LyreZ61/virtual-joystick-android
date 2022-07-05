@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-
 android {
     compileSdkVersion 30
 
@@ -42,6 +41,3 @@ ext {
     developerName = 'Damien Brun'
     developerEmail = 'makowildcat@gmail.com'
 }
-
-apply from: 'https://raw.githubusercontent.com/attwellbrian/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/attwellbrian/JCenter/master/bintrayv1.gradle'
