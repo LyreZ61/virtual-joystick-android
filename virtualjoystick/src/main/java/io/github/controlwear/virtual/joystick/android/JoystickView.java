@@ -350,8 +350,11 @@ public class JoystickView extends View
         mFixedCenterX = mCenterX = mPosX = getWidth() / 2;
         mFixedCenterY = mCenterY = mPosY = mStartY =  getWidth() / 2;
 
+    }
+
+    private void ButtonDownInit(){
         if (mButtonStartYDown){
-            mPosY = mStartY = mFixedCenterY - mBorderRadius * 2;
+            mPosY = mStartY = mFixedCenterY - mBorderRadius;
         }
     }
 
@@ -412,6 +415,8 @@ public class JoystickView extends View
 
         if (mButtonBitmap != null)
             mButtonBitmap = Bitmap.createScaledBitmap(mButtonBitmap, mButtonRadius * 2, mButtonRadius * 2, true);
+
+        ButtonDownInit();
     }
 
 
