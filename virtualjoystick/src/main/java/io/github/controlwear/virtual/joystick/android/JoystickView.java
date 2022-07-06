@@ -670,6 +670,7 @@ public class JoystickView extends View
         if (getWidth() == 0) {
             return 50;
         }
+        int a = getWidth();
         return Math.round((mPosX-mButtonRadius)*100.0f/(getWidth()-mButtonRadius*2));
     }
 
@@ -683,6 +684,7 @@ public class JoystickView extends View
         if (getHeight() == 0) {
             return 50;
         }
+        int a = getHeight();
         return Math.round((mPosY-mButtonRadius)*100.0f/(getHeight()-mButtonRadius*2));
     }
 
