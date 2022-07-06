@@ -545,12 +545,14 @@ public class JoystickView extends View
         // (buttonStickBorder && abs != 0) means wherever is the button we stick it to the border except when abs == 0
         if (abs > mBorderRadius || (mButtonStickToBorder && abs != 0)) {
 
-            if (mAutoReCenterButtonOnlyX) {
-                mPosYOld = mPosY;
-            }
             mPosX = (int) ((mPosX - mCenterX) * mBorderRadius / abs + mCenterX);
             mPosY = (int) ((mPosY - mCenterY) * mBorderRadius / abs + mCenterY);
 
+        }
+        else{
+            if (mAutoReCenterButtonOnlyX) {
+                mPosYOld = mPosY;
+            }
         }
 
         if (!mAutoReCenterButton || !mAutoReCenterButtonOnlyX) {
