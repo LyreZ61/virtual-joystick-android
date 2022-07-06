@@ -416,7 +416,7 @@ public class JoystickView extends View
         if (mButtonBitmap != null)
             mButtonBitmap = Bitmap.createScaledBitmap(mButtonBitmap, mButtonRadius * 2, mButtonRadius * 2, true);
 
-        /*ButtonDownInit();*/
+        ButtonDownInit();
     }
 
 
