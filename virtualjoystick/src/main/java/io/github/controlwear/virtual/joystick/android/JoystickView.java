@@ -416,7 +416,7 @@ public class JoystickView extends View
         if (mButtonBitmap != null)
             mButtonBitmap = Bitmap.createScaledBitmap(mButtonBitmap, mButtonRadius * 2, mButtonRadius * 2, true);
 
-        ButtonDownInit();
+        /*ButtonDownInit();*/
     }
 
 
@@ -693,7 +693,7 @@ public class JoystickView extends View
      */
     public int getRealX() {
         if (getWidth() == 0) {
-            return 285;
+            return mPosX;
         }
         return mPosX;
     }
@@ -706,7 +706,7 @@ public class JoystickView extends View
      */
     public int getRealY() {
         if (getHeight() == 0) {
-            return 285;
+            return mStartY;
         }
         return mPosY;
     }
