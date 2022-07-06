@@ -144,6 +144,7 @@ public class JoystickView extends View
     // COORDINATE
     private int mPosX = 0;
     private int mPosY = 0;
+    private int mPosYOld = 0;
     private int mCenterX = 0;
     private int mCenterY = 0;
     private int mStartY = 0;
@@ -543,8 +544,13 @@ public class JoystickView extends View
         // (abs > mBorderRadius) means button is too far therefore we limit to border
         // (buttonStickBorder && abs != 0) means wherever is the button we stick it to the border except when abs == 0
         if (abs > mBorderRadius || (mButtonStickToBorder && abs != 0)) {
+
+            if (mAutoReCenterButtonOnlyX) {
+                mPosYOld = mPosY;
+            }
             mPosX = (int) ((mPosX - mCenterX) * mBorderRadius / abs + mCenterX);
             mPosY = (int) ((mPosY - mCenterY) * mBorderRadius / abs + mCenterY);
+
         }
 
         if (!mAutoReCenterButton || !mAutoReCenterButtonOnlyX) {
@@ -600,6 +606,7 @@ public class JoystickView extends View
      */
     public void resetButtonOnlyXPosition() {
         mPosX = mCenterX;
+        mPosY = mPosYOld;
     }
 
     /**
@@ -695,7 +702,7 @@ public class JoystickView extends View
      */
     public int getRealX() {
         if (getWidth() == 0) {
-            return mPosX;
+            return 50;
         }
         return mPosX;
     }
@@ -708,7 +715,7 @@ public class JoystickView extends View
      */
     public int getRealY() {
         if (getHeight() == 0) {
-            return mStartY;
+            return 50;
         }
         return mPosY;
     }
