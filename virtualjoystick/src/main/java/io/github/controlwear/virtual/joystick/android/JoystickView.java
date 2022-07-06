@@ -351,7 +351,7 @@ public class JoystickView extends View
         mFixedCenterY = mCenterY = mPosY = mStartY =  getWidth() / 2;
 
         if (mButtonStartYDown){
-            mPosY = mStartY = getWidth();
+            mPosY = mStartY = mButtonRadius;
         }
     }
 
@@ -688,7 +688,7 @@ public class JoystickView extends View
      */
     public int getRealX() {
         if (getWidth() == 0) {
-            return mCenterX;
+            return 285;
         }
         return mPosX;
     }
@@ -701,7 +701,7 @@ public class JoystickView extends View
      */
     public int getRealY() {
         if (getHeight() == 0) {
-            return mStartY;
+            return 285;
         }
         return mPosY;
     }
