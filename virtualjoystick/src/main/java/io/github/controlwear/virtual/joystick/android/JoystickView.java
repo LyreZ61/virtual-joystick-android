@@ -146,6 +146,7 @@ public class JoystickView extends View
     private int mPosY = 0;
     private int mCenterX = 0;
     private int mCenterY = 0;
+    private int mStartY = 0;
 
     private int mFixedCenterX = 0;
     private int mFixedCenterY = 0;
@@ -154,6 +155,12 @@ public class JoystickView extends View
      * Used to adapt behavior whether it is auto-defined center (false) or fixed center (true)
      */
     private boolean mFixedCenter;
+
+
+    /**
+     * Used to adapt behavior to set the start Position of the Button in Y (DOWN).
+     */
+    private boolean mButtonStartYDown = false;
 
 
     /**
@@ -341,7 +348,11 @@ public class JoystickView extends View
     private void initPosition() {
         // get the center of view to position circle
         mFixedCenterX = mCenterX = mPosX = getWidth() / 2;
-        mFixedCenterY = mCenterY = mPosY = getWidth() / 2;
+        mFixedCenterY = mCenterY = mPosY = mStartY =  getWidth() / 2;
+
+        if (mButtonStartYDown){
+            mPosY = mStartY = getWidth();
+        }
     }
 
 
@@ -531,7 +542,7 @@ public class JoystickView extends View
             mPosY = (int) ((mPosY - mCenterY) * mBorderRadius / abs + mCenterY);
         }
 
-        if (!mAutoReCenterButton) {
+        if (!mAutoReCenterButton || !mAutoReCenterButtonOnlyX) {
             // Now update the last strength and angle if not reset to center
             if (mCallback != null)
                 mCallback.onMove(getAngle(), getStrength());
@@ -585,7 +596,6 @@ public class JoystickView extends View
     public void resetButtonOnlyXPosition() {
         mPosX = mCenterX;
     }
-
 
     /**
      * Return the current direction allowed for the button to move
@@ -676,9 +686,9 @@ public class JoystickView extends View
      * to top-left virtual corner of the border
      * @return coordinate of X (normalized between 0 and 100)
      */
-    public int getNormalizedXTEST() {
+    public int getRealX() {
         if (getWidth() == 0) {
-            return 50;
+            return mCenterX;
         }
         return mPosX;
     }
@@ -689,9 +699,9 @@ public class JoystickView extends View
      * to top-left virtual corner of the border
      * @return coordinate of Y (normalized between 0 and 100)
      */
-    public int getNormalizedYTEST() {
+    public int getRealY() {
         if (getHeight() == 0) {
-            return 50;
+            return mStartY;
         }
         return mPosY;
     }
@@ -864,6 +874,13 @@ public class JoystickView extends View
         if (newRatio > 0.0f & newRatio <= 1.0f) {
             mBackgroundSizeRatio = newRatio;
         }
+    }
+
+    /**
+     * Set starting point of Button X-Cord (DOWN).
+     */
+    public void startButtonYDown(boolean b){
+        mButtonStartYDown = b;
     }
 
 
