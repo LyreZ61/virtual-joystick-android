@@ -151,6 +151,7 @@ public class JoystickView extends View
 
     private int mFixedCenterX = 0;
     private int mFixedCenterY = 0;
+    private double abs;
 
     /**
      * Used to adapt behavior whether it is auto-defined center (false) or fixed center (true)
@@ -538,7 +539,7 @@ public class JoystickView extends View
             }
         }
 
-        double abs = Math.sqrt((mPosX - mCenterX) * (mPosX - mCenterX)
+        abs = Math.sqrt((mPosX - mCenterX) * (mPosX - mCenterX)
                 + (mPosY - mCenterY) * (mPosY - mCenterY));
 
         // (abs > mBorderRadius) means button is too far therefore we limit to border
@@ -606,7 +607,9 @@ public class JoystickView extends View
      */
     public void resetButtonOnlyXPosition() {
         mPosX = mCenterX;
+        if (abs > mBorderRadius){
         mPosY = mPosYOld;
+        }
     }
 
     /**
