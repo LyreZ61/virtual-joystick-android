@@ -548,8 +548,6 @@ public class JoystickView extends View
             mPosX = (int) ((mPosX - mCenterX) * mBorderRadius / abs + mCenterX);
             mPosY = (int) ((mPosY - mCenterY) * mBorderRadius / abs + mCenterY);
 
-        }
-        else{
             if (mAutoReCenterButtonOnlyX) {
                 mPosYOld = mPosY;
             }
