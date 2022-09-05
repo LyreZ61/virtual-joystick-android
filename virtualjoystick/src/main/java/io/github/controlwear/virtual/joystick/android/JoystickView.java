@@ -672,6 +672,21 @@ public class JoystickView extends View
 
 
     /**
+     * Return the current using state of the button stick (OnMove Event) as boolean.
+     * @return True if the button stick used otherwise False.
+     */
+    public boolean getOnMoveState() {
+        return mCallback != null;
+        /*
+         * Same ->
+         * if (mCallback != null) {
+         *   return true;
+         * }
+         * return false;
+         */
+    }
+
+    /**
      * Return the relative X coordinate of button center related
      * to top-left virtual corner of the border
      * @return coordinate of X (normalized between 0 and 100)
