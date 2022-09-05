@@ -208,7 +208,7 @@ public class JoystickView extends View
      */
     private float mBackgroundRadius;
 
-    private boolean onMoveState = true;
+    private float onMoveState = 0f;
 
     /**
      * Listener used to dispatch OnMove event
@@ -471,7 +471,7 @@ public class JoystickView extends View
         if (event.getAction() == MotionEvent.ACTION_UP) {
 
             // set onMove State
-            onMoveState = false;
+            onMoveState = 0f;
 
             // stop listener because the finger left the touch screen
             mThread.interrupt();
@@ -516,7 +516,7 @@ public class JoystickView extends View
                     mCenterX = mPosX;
                     mCenterY = mPosY;
                 }
-                onMoveState = true;
+                onMoveState = 1f;
                 break;
 
             case MotionEvent.ACTION_POINTER_DOWN: {
@@ -680,7 +680,7 @@ public class JoystickView extends View
      * Return the current using state of the button stick (OnMove Event) as boolean.
      * @return True if the button stick used otherwise False.
      */
-    public boolean getOnMoveState() {
+    public float getOnMoveState() {
         return onMoveState;
     }
 
