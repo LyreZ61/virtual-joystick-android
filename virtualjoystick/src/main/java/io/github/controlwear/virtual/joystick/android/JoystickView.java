@@ -726,6 +726,19 @@ public class JoystickView extends View
 
     /**
      * Return the relative Y coordinate of the button center related
+     * to top-left virtual corner of the border left Stick scaling
+     * @return coordinate of Y (normalized between 0 and 100)
+     */
+    public int getNormalizedYLeftStick() {
+        if (getHeight() == 0) {
+            return 50;
+        }
+        int a = getHeight();
+        return Math.round((mPosY-mButtonRadius)*2000.0f/(getHeight()-mButtonRadius*2));
+    }
+
+    /**
+     * Return the relative Y coordinate of the button center related
      * to top-left virtual corner of the border for right Stick scaling
      * @return coordinate of Y (normalized between 0 and 100)
      */
