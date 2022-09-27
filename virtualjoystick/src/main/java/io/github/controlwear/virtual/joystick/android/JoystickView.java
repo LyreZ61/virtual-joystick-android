@@ -694,7 +694,8 @@ public class JoystickView extends View
             return 50;
         }
         int a = getWidth();
-        return Math.round((mPosX-mButtonRadius)*1000.0f/(getWidth()-mButtonRadius*2));
+        // return Math.round((mPosX-mButtonRadius)*1000.0f/(getWidth()-mButtonRadius*2)); range 0 -1000
+        return Math.round((mPosX-mButtonRadius)*200.0f/(getWidth()-mButtonRadius*2));
     }
 
 
@@ -708,7 +709,8 @@ public class JoystickView extends View
             return 50;
         }
         int a = getHeight();
-        return Math.round((mPosY-mButtonRadius)*1000.0f/(getHeight()-mButtonRadius*2));
+        // return Math.round((mPosY-mButtonRadius)*1000.0f/(getHeight()-mButtonRadius*2)); range 0 - 1000
+        return Math.round((mPosY-mButtonRadius)*100.0f/(getHeight()-mButtonRadius*2));
     }
 
     /**
