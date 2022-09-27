@@ -694,7 +694,19 @@ public class JoystickView extends View
             return 50;
         }
         int a = getWidth();
-        // return Math.round((mPosX-mButtonRadius)*1000.0f/(getWidth()-mButtonRadius*2)); range 0 -1000
+        return Math.round((mPosX-mButtonRadius)*1000.0f/(getWidth()-mButtonRadius*2));
+    }
+
+    /**
+     * Return the relative X coordinate of button center related
+     * to top-left virtual corner of the border for right Stick scaling
+     * @return coordinate of X (normalized between 0 and 100)
+     */
+    public int getNormalizedXRightStick() {
+        if (getWidth() == 0) {
+            return 50;
+        }
+        int a = getWidth();
         return Math.round((mPosX-mButtonRadius)*200.0f/(getWidth()-mButtonRadius*2));
     }
 
@@ -709,9 +721,22 @@ public class JoystickView extends View
             return 50;
         }
         int a = getHeight();
-        // return Math.round((mPosY-mButtonRadius)*1000.0f/(getHeight()-mButtonRadius*2)); range 0 - 1000
-        return Math.round((mPosY-mButtonRadius)*100.0f/(getHeight()-mButtonRadius*2));
+        return Math.round((mPosY-mButtonRadius)*1000.0f/(getHeight()-mButtonRadius*2));
     }
+
+    /**
+     * Return the relative Y coordinate of the button center related
+     * to top-left virtual corner of the border for right Stick scaling
+     * @return coordinate of Y (normalized between 0 and 100)
+     */
+    public int getNormalizedYRightStick() {
+        if (getHeight() == 0) {
+            return 50;
+        }
+        int a = getHeight();
+        return Math.round((mPosY-mButtonRadius)*200.0f/(getHeight()-mButtonRadius*2));
+    }
+
 
     /**
      * Return the relative X coordinate of button center related
